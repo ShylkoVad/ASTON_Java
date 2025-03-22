@@ -98,7 +98,7 @@ public class Main {
                             "2.Найти объект\n" +
                             "3.Записать в файл\n" +
                             "4.Вывести данные\n" +
-                            "0.Вернуться к выбору типа данных\n");
+                            "0.Вернуться к выбору типа данных");
                     int choiceAction = parseInt(reader.readLine());
 
                     switch (choiceAction) {
