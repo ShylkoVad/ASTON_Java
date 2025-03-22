@@ -1,12 +1,14 @@
 package ru.aston.strategy;
 
+import ru.aston.my_array_list.MyArrayList;
+
 import java.util.ArrayList;
 
 public class ShellSort {
 
-    public static <T extends Comparable<T>> void shellSortComparable(ArrayList<T> list) {
+    public static <T extends Comparable<T>> void shellSortComparable(MyArrayList<T> list) {
         if (list == null || list.isEmpty()) {
-            return;
+            throw new IllegalArgumentException("List is null or empty");
         }
 
         int n = list.size();
@@ -15,10 +17,10 @@ public class ShellSort {
                 T temp = list.get(i);
                 int j = i;
                 while (j >= gap && list.get(j - gap).compareTo(temp) > 0) {
-                    list.set(j, list.get(j - gap));
+                    list.set(list.get(j - gap), j);
                     j -= gap;
                 }
-                list.set(j, temp);
+                list.set(temp, j );
             }
         }
     }
