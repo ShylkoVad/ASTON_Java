@@ -1,19 +1,19 @@
 package ru.aston.strategy.car;
 
 import ru.aston.entity.Car;
+import ru.aston.my_array_list.CustomArrayList;
 import ru.aston.strategy.FillStrategy;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class CarManualFillStrategy implements FillStrategy<Car> {
     private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     @Override
-    public ArrayList<Car> fillList(int size) {
-        ArrayList<Car> cars = new ArrayList<>();
+    public CustomArrayList<Car> fillList(int size) {
+        CustomArrayList<Car> cars = new CustomArrayList<>();
         try {
             for (int i = 0; i < size; i++) {
                 System.out.println("Введите данные для автомобиля " + (i + 1) + ":");

@@ -1,17 +1,17 @@
 package ru.aston.strategy.rootvegetable;
 
 import ru.aston.entity.RootVegetable;
+import ru.aston.my_array_list.CustomArrayList;
 import ru.aston.strategy.FillStrategy;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class RootVegetableRandomFillStrategy implements FillStrategy<RootVegetable> {
     private final Random random = new Random();
 
     @Override
-    public ArrayList<RootVegetable> fillList(int size) {
-        ArrayList<RootVegetable> vegetables = new ArrayList<>();
+    public CustomArrayList<RootVegetable> fillList(int size) {
+        CustomArrayList<RootVegetable> vegetables = new CustomArrayList<>();
         String[] types = {"Морковь", "Картофель", "Свекла", "Редис", "Редька", "Репа",
                           "Сельдерей", "Петрушка", "Пастернак", "Хрен"};
         String[] colors = {"Оранжевый", "Красный", "Желтый", "Фиолетовый", "Зеленый",

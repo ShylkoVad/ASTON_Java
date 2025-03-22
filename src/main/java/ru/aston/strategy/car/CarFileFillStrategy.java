@@ -1,10 +1,10 @@
 package ru.aston.strategy.car;
 
 import ru.aston.entity.Car;
+import ru.aston.my_array_list.CustomArrayList;
 import ru.aston.strategy.FillStrategy;
 
 import java.io.*;
-import java.util.ArrayList;
 
 public class CarFileFillStrategy implements FillStrategy<Car> {
     private final String filePath;
@@ -14,8 +14,8 @@ public class CarFileFillStrategy implements FillStrategy<Car> {
     }
 
     @Override
-    public ArrayList<Car> fillList(int size) {
-        ArrayList<Car> cars = new ArrayList<>();
+    public CustomArrayList<Car> fillList(int size) {
+        CustomArrayList<Car> cars = new CustomArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             for (int i = 0; i < size && reader.ready(); i++) {
                 String line = reader.readLine();

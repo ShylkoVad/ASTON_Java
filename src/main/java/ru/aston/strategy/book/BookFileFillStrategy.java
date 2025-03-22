@@ -1,13 +1,13 @@
 package ru.aston.strategy.book;
 
 import ru.aston.entity.Book;
+import ru.aston.my_array_list.CustomArrayList;
 import ru.aston.strategy.FillStrategy;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class BookFileFillStrategy implements FillStrategy<Book> {
     private final String filePath;
@@ -17,8 +17,8 @@ public class BookFileFillStrategy implements FillStrategy<Book> {
     }
 
     @Override
-    public ArrayList<Book> fillList(int size) {
-        ArrayList<Book> books = new ArrayList<>();
+    public CustomArrayList<Book> fillList(int size) {
+        CustomArrayList<Book> books = new CustomArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             for (int i = 0; i < size; i++) {
                 String line = reader.readLine();

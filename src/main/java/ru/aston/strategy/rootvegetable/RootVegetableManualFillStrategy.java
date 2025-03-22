@@ -1,19 +1,19 @@
 package ru.aston.strategy.rootvegetable;
 
 import ru.aston.entity.RootVegetable;
+import ru.aston.my_array_list.CustomArrayList;
 import ru.aston.strategy.FillStrategy;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class RootVegetableManualFillStrategy implements FillStrategy<RootVegetable> {
     private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     @Override
-    public ArrayList<RootVegetable> fillList(int size) {
-        ArrayList<RootVegetable> vegetables = new ArrayList<>();
+    public CustomArrayList<RootVegetable> fillList(int size) {
+        CustomArrayList<RootVegetable> vegetables = new CustomArrayList<>();
         try {
             for (int i = 0; i < size; i++) {
                 System.out.println("Введите данные для корнеплода " + (i + 1) + ":");

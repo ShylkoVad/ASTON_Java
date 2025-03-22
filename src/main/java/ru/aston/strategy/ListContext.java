@@ -1,6 +1,7 @@
 package ru.aston.strategy;
 
-import java.util.ArrayList;
+import ru.aston.my_array_list.CustomArrayList;
+
 
 public class ListContext<T> {
     private FillStrategy<T> strategy;
@@ -9,7 +10,7 @@ public class ListContext<T> {
         this.strategy = strategy;
     }
 
-    public ArrayList<T> fillArray(int size) {
+    public CustomArrayList<T> fillArray(int size) {
         if (strategy == null) {
             throw new IllegalStateException("Стратегия не установлена");
         }

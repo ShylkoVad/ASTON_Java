@@ -1,7 +1,7 @@
 package ru.aston.strategy;
 
-import java.util.ArrayList;
+import ru.aston.my_array_list.CustomArrayList;
 
 public interface FillStrategy<T> {
-    ArrayList<T> fillList(int size);
+    CustomArrayList<T> fillList(int size);
 }

@@ -1,19 +1,19 @@
 package ru.aston.strategy.book;
 
 import ru.aston.entity.Book;
+import ru.aston.my_array_list.CustomArrayList;
 import ru.aston.strategy.FillStrategy;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class BookManualFillStrategy implements FillStrategy<Book> {
     private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     @Override
-    public ArrayList<Book> fillList(int size) {
-        ArrayList<Book> books = new ArrayList<>();
+    public CustomArrayList<Book> fillList(int size) {
+        CustomArrayList<Book> books = new CustomArrayList<>();
         try {
             for (int i = 0; i < size; i++) {
                 System.out.println("Введите данные для книги " + (i + 1) + ":");

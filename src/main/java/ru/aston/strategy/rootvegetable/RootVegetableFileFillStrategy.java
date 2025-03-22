@@ -1,13 +1,13 @@
 package ru.aston.strategy.rootvegetable;
 
 import ru.aston.entity.RootVegetable;
+import ru.aston.my_array_list.CustomArrayList;
 import ru.aston.strategy.FillStrategy;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class RootVegetableFileFillStrategy implements FillStrategy<RootVegetable> {
     private final String filePath;
@@ -17,8 +17,8 @@ public class RootVegetableFileFillStrategy implements FillStrategy<RootVegetable
     }
 
     @Override
-    public ArrayList<RootVegetable> fillList(int size) {
-        ArrayList<RootVegetable> vegetables = new ArrayList<>();
+    public CustomArrayList<RootVegetable> fillList(int size) {
+        CustomArrayList<RootVegetable> vegetables = new CustomArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             for (int i = 0; i < size; i++) {
                 String line = reader.readLine();

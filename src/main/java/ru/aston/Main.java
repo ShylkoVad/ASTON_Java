@@ -3,6 +3,7 @@ package ru.aston;
 import ru.aston.entity.Book;
 import ru.aston.entity.Car;
 import ru.aston.entity.RootVegetable;
+import ru.aston.my_array_list.CustomArrayList;
 import ru.aston.strategy.ListContext;
 import ru.aston.strategy.book.BookFileFillStrategy;
 import ru.aston.strategy.book.BookManualFillStrategy;
@@ -23,13 +24,19 @@ import static java.lang.Integer.*;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<?> objects = null;
+        CustomArrayList<?> objects = null;
         boolean running = true;
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             while (running) {
 
-                System.out.println("Введите изначальную длину массива для ввода данных:");
+                System.out.println("Введите изначальную длину массива для ввода данных:\n" +
+                        "Введите 0 для завершения работы");
                 int size = parseInt(reader.readLine());
+                if (size == 0) {
+                    running = false;
+                    System.out.println("Завершение работы");
+                    break;
+                }
 
                 System.out.println("Выберите тип данных:\n" +
                         "1.Автомобили\n" +
@@ -40,8 +47,7 @@ public class Main {
                 System.out.println("Введите цифру для выбора способа ввода данных:\n" +
                         "1.Заполнить вручную.\n" +
                         "2.Заполнить из файла.\n" +
-                        "3.Заполнить случайно.\n" +
-                        "0.Завершить работу.");
+                        "3.Заполнить случайно.");
                 int choiceFillStrategy = parseInt(reader.readLine());
 
                 switch (choiceDataType) {
@@ -84,9 +90,6 @@ public class Main {
                         }
                         vegetableContext.fillArray(size);
                         break;
-                    case 0:
-                        running = false;
-                        break;
 
                 }
                 while (objects != null) {
@@ -106,8 +109,8 @@ public class Main {
                         case 3 :
                             break;
                         case 4:
-                            for (Object object : objects) {
-                                System.out.println(object.toString());
+                            for (int i = 0; i < objects.size(); i++) {
+                                System.out.println(objects.get(i).toString());
                             }
                             break;
                         case 0 :
