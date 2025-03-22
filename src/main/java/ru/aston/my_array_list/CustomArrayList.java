@@ -1,27 +1,25 @@
 package ru.aston.my_array_list;
 
 /**
- * Класс MyArrayList реализует интерфейс MySimple и представляет собой динамический массив.
+ * Класс CustomArrayList реализует интерфейс MyCustomList и представляет собой динамический массив.
  * Поддерживаемые методы описаны ниже.
- * У каждого экземпляра MyArrayList есть емкость. Емкость — это размер массива, используемого для хранения
- элементов в списке. Она всегда не меньше размера списка. По мере добавления элементов в MyArrayList его емкость
+ * У каждого экземпляра CustomArrayList есть емкость. Емкость — это размер массива, используемого для хранения
+ элементов в списке. Она всегда не меньше размера списка. По мере добавления элементов в CustomArrayList его емкость
  автоматически увеличивается.
  * @param <E> тип элементов в списке
  */
 
-public class MyArrayList<E>  implements MySimple{
+public class CustomArrayList<E> implements MyCustomList<E> {
 
     /**
      * Массив в котором хранятся все элементы списка
      */
-    Object[] elementsData;
-
+    private E[] elementsData;
 
     /**
      * Начальная емкость списка по умолчанию
      */
-    private static final int ARRAY_lENGTH = 10;
-
+    private static final int INITIAL_CAPACITY = 10;
 
     /**
      * Количество содержащихся в списке элеентов
@@ -31,23 +29,23 @@ public class MyArrayList<E>  implements MySimple{
     /**
      * Конструктор, создающий пустой список с начальной ёмкостью десять
      */
-    public MyArrayList(){
-        this.elementsData = new Object[ARRAY_lENGTH];
+    @SuppressWarnings("unchecked")
+    public CustomArrayList() {
+        elementsData = (E[]) new Object[INITIAL_CAPACITY];
         size = 0;
     }
-
 
     /**
      * Конструктор, создающий пустой список с заданной начальной ёмкостью
      * @param arrayLength начальная емкость списка
      * IllegalArgumentException – если указанная начальная емкость отрицательна
      */
-    public MyArrayList(int arrayLength){
-        if (arrayLength > 0){
-            this.elementsData = new Object[arrayLength];
+    @SuppressWarnings("unchecked")
+    public CustomArrayList(int arrayLength) {
+        if (arrayLength > 0) {
+            elementsData = (E[]) new Object[arrayLength];
         } else {
-            throw new IllegalArgumentException("Некорректная длинна: "+
-                    arrayLength);
+            throw new IllegalArgumentException("Некорректная длинна: " + arrayLength);
         }
         size = 0;
     }
@@ -57,25 +55,14 @@ public class MyArrayList<E>  implements MySimple{
      * @param o элемент, который будет добавлен в этот список
      */
     @Override
-    public void add(Object o) {
-        if (o != null){
-            if (!isEmpty()){
-                if (size < elementsData.length){
-                    elementsData [size] = o;
-                    size++;
-                } else {
-                    Object[] temp = elementsData;
-                    elementsData = new Object[temp.length + temp.length/2];
-                    System.arraycopy(temp,0,elementsData, 0, temp.length);
-                    elementsData[size]= 0;
-                    size++;
-                }
-            }else {
-                elementsData[size] = 0;
-                size++;
+    public void add(E o) {
+        if (o != null) {
+            if (size == elementsData.length) {
+                resize();
             }
+            elementsData[size++] = o;
         } else {
-            System.out.println("Некорректный ввод. Вы пытаетесь добавить пустой объект");
+            System.out.println("Некорректный ввод. Вы пытаетесь добавить пустой объект.");
         }
     }
 
@@ -88,36 +75,23 @@ public class MyArrayList<E>  implements MySimple{
      * IndexOutOfBoundsException - если укаанный индекс находится вне допустимого дипазона
      */
     @Override
-    public void set(Object o, int index) {
-        if (index < 0 || index > size) {
+    public void set(E o, int index) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Индекс вне допустимого диапазона: " + index);
         }
-        if(elementsData.length == size) {
-            Object [] temp = elementsData;
-            elementsData = new Object[temp.length + temp.length/2];
-            System.arraycopy(temp,0,elementsData,0,temp.length);
-        }
-        if(index == size){
-            elementsData[index] = o;
-            size++;
-        }  else if (index < size){
-            elementsData[index] = o;
-        }
+        elementsData[index] = o;
     }
 
     /**
      * Метод возвращает элемент в указанной позиции в списке
      * @param index позици вовращаемого элемента списка
      */
-
     @Override
-    @SuppressWarnings("unchecked")
     public E get(int index) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Индекс вне допустимого диапазона: " + index);
-        } else {
-            return (E) elementsData[index];
         }
+        return elementsData[index];
     }
 
     /**
@@ -127,22 +101,17 @@ public class MyArrayList<E>  implements MySimple{
      * Возвращает true при успешном удалении элемента
      * IndexOutOfBoundsException - при передаче индекса, который находится вне диапазона от 0 до size
      */
-
     @Override
     public boolean remove(int index) {
-        boolean flag = false;
-        if (index < 0 || index >= size) {
+        if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Индекс вне допустимого диапазона: " + index);
-        } else {
-            Object [] temp = elementsData;
-            elementsData = new Object[temp.length];
-            System.arraycopy(temp,0,elementsData,0,index);
-            int amountElementAfterIndex = temp.length - 1 - index;
-            System.arraycopy(temp, index + 1, elementsData, index, amountElementAfterIndex);
-            size--;
-            flag = true;
         }
-        return flag;
+
+        for (int i = index; i < size - 1; i++) {
+            elementsData[i] = elementsData[i + 1];
+        }
+        elementsData[--size] = null;
+        return true;
     }
 
     /**
@@ -150,26 +119,25 @@ public class MyArrayList<E>  implements MySimple{
      */
     @Override
     public void clear() {
-        elementsData = new Object[ARRAY_lENGTH];
+        for (int i = 0; i < size; i++) {
+            elementsData[i] = null;
+        }
         size = 0;
     }
 
     /**
      * Метод осуществляет проверку наличия переданного элемента в списке
-     * возвращает true, если  этот список содержит хотя бы один элемент e,
-     такой что Objects.equals(o, e)
+     * возвращает true, если  этот список содержит хотя бы один элемент e
      * @param o элемент, наличие которого в списке должно быть проверено
      */
     @Override
     public boolean contains(Object o) {
-        boolean flag = false;
-        for (int i = 0; i < elementsData.length;i++){
-            if(elementsData[i].equals(o)){
-                flag = true;
-                break;
+        for (int i = 0; i < size; i++) {
+            if (elementsData[i].equals(o)) {
+                return true;
             }
         }
-        return flag;
+        return false;
     }
 
     /**
@@ -181,13 +149,18 @@ public class MyArrayList<E>  implements MySimple{
     }
 
     /**
-     * Метод обрезает емкость этого экземпляра ArrayList до текущего размера списка
+     * Метод обрезает емкость этого экземпляра CustomArrayList до текущего размера списка
      */
     @Override
-    public void TrimToSize() {
-        Object [] temp = elementsData;
-        elementsData = new Object[size];
-        System.arraycopy(temp,0,elementsData,0,size);
+    public void trimToSize() {
+        if (size < elementsData.length) {
+            @SuppressWarnings("unchecked")
+            E[] newElements = (E[]) new Object[size];
+            for (int i = 0; i < size; i++) {
+                newElements[i] = elementsData[i];
+            }
+            elementsData = newElements;
+        }
     }
 
     /**
@@ -195,11 +168,7 @@ public class MyArrayList<E>  implements MySimple{
      */
     @Override
     public boolean isEmpty() {
-        if (size == 0){
-            return true;
-        } else {
-            return false;
-        }
+        return size == 0;
     }
 
     /**
@@ -209,14 +178,12 @@ public class MyArrayList<E>  implements MySimple{
      */
     @Override
     public int indexOf(Object o) {
-        int index = -1;
-        for (int i = 0; i < elementsData.length; i++){
-            if (elementsData[i].equals(o)){
-                index = i;
-                break;
+        for (int i = 0; i < size; i++) {
+            if (elementsData[i].equals(o)) {
+                return i;
             }
         }
-        return index;
+        return -1;
     }
 
     /**
@@ -227,13 +194,23 @@ public class MyArrayList<E>  implements MySimple{
      */
     @Override
     public int lastIndexOf(Object o) {
-        int index = -1;
-        for (int i = size - 1; i >= 0; i--){
-            if (elementsData[i].equals(o)){
-                index = i;
-                break;
+        for (int i = size - 1; i >= 0; i--) {
+            if (elementsData[i].equals(o)) {
+                return i;
             }
         }
-        return index;
+        return -1;
+    }
+
+
+    // Метод для изменения размера массива
+    @SuppressWarnings("unchecked")
+    private void resize() {
+        int newCapacity = elementsData.length + (elementsData.length / 2);
+        E[] newElements = (E[]) new Object[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elementsData[i];
+        }
+        elementsData = newElements;
     }
 }
