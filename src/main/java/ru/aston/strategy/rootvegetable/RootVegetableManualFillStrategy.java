@@ -2,6 +2,7 @@ package ru.aston.strategy.rootvegetable;
 
 import ru.aston.entity.RootVegetable;
 import ru.aston.my_array_list.CustomArrayList;
+import ru.aston.service.Validator;
 import ru.aston.strategy.FillStrategy;
 
 import java.io.BufferedReader;
@@ -23,7 +24,9 @@ public class RootVegetableManualFillStrategy implements FillStrategy<RootVegetab
                 double weight = Double.parseDouble(reader.readLine());
                 System.out.print("Цвет: ");
                 String color = reader.readLine();
-                vegetables.add(new RootVegetable(type, weight, color));
+                if (Validator.validateRootVegetableData(type, weight, color)) {
+                    vegetables.add(new RootVegetable(type, weight, color));
+                }
             }
         } catch (IOException e) {
             System.out.println("Введены некорректные данные");

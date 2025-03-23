@@ -2,6 +2,7 @@ package ru.aston.strategy.car;
 
 import ru.aston.entity.Car;
 import ru.aston.my_array_list.CustomArrayList;
+import ru.aston.service.Validator;
 import ru.aston.strategy.FillStrategy;
 
 import java.io.BufferedReader;
@@ -23,7 +24,9 @@ public class CarManualFillStrategy implements FillStrategy<Car> {
                 String model = reader.readLine();
                 System.out.print("Год выпуска: ");
                 int year = Integer.parseInt(reader.readLine());
-                cars.add(new Car(power, model, year));
+                if (Validator.validateCarData(model, power, year)) {
+                    cars.add(new Car(power, model, year));
+                }
             }
         } catch (IOException e) {
             System.out.println("Введены некорректные данные.");

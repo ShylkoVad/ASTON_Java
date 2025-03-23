@@ -2,6 +2,7 @@ package ru.aston.strategy.book;
 
 import ru.aston.entity.Book;
 import ru.aston.my_array_list.CustomArrayList;
+import ru.aston.service.Validator;
 import ru.aston.strategy.FillStrategy;
 
 import java.io.BufferedReader;
@@ -26,6 +27,9 @@ public class BookFileFillStrategy implements FillStrategy<Book> {
                 String author = split[0].trim();
                 String title = split[1].trim();
                 int pages = Integer.parseInt(split[2].trim());
+                if (Validator.validateBookData(title, author, pages)) {
+                    books.add(new Book(author, title, pages));
+                }
             }
         } catch (FileNotFoundException e) {
             System.out.println("Файл не найден: " + filePath);

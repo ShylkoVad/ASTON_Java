@@ -2,6 +2,7 @@ package ru.aston.strategy.rootvegetable;
 
 import ru.aston.entity.RootVegetable;
 import ru.aston.my_array_list.CustomArrayList;
+import ru.aston.service.Validator;
 import ru.aston.strategy.FillStrategy;
 
 import java.io.BufferedReader;
@@ -26,7 +27,9 @@ public class RootVegetableFileFillStrategy implements FillStrategy<RootVegetable
                 String type = split[0].trim();
                 double weight = Double.parseDouble(split[1].trim());
                 String color = split[2].trim();
-                vegetables.add(new RootVegetable(type, weight, color));
+                if (Validator.validateRootVegetableData(type, weight, color)) {
+                    vegetables.add(new RootVegetable(type, weight, color));
+                }
             }
         } catch (FileNotFoundException e) {
             System.out.println("Файл не найден: " + filePath);
