@@ -59,6 +59,10 @@ public class Main {
                     }
                 }
 
+                if(choiceFillStrategy == 0){
+                    continue;
+                }
+
 
                 int size = -1;
                 while (size < 1){
@@ -136,24 +140,44 @@ public class Main {
                         case 1 :
                             break;
                         case 2 :
+                            BinarySearch binarySearch = new BinarySearch();
+                            int index = -1;
                             switch (choiceDataType) {
                                 case 1:
                                     CustomArrayList<Car> car;
                                     ListContext<Car> carsContext = new ListContext<>();
                                     carsContext.setStrategy(new CarManualFillStrategy());
                                     car = carsContext.fillArray(1);
-                                                                        break;
+                                    index = binarySearch.search(objects, car.get(0));
+                                    if(index == -1){
+                                        System.out.println("Данного объекта нет в списке");
+                                    }else{
+                                        System.out.println("Данный объект находится на " + index + 1 + " месте в списке");
+                                    }
+                                    break;
                                 case 2:
                                     CustomArrayList<Book> book;
                                     ListContext<Book> booksContext = new ListContext<>();
                                     booksContext.setStrategy(new BookManualFillStrategy());
                                     book = booksContext.fillArray(1);
+                                    index = binarySearch.search(objects, book.get(0));
+                                    if(index == -1){
+                                        System.out.println("Данного объекта нет в списке");
+                                    }else{
+                                        System.out.println("Данный объект находится на " + index + 1 + " месте в списке");
+                                    }
                                     break;
                                 case 3:
                                     CustomArrayList<RootVegetable> vegetable;
                                     ListContext<RootVegetable> vegetableContext = new ListContext<>();
                                     vegetableContext.setStrategy(new RootVegetableManualFillStrategy());
                                     vegetable = vegetableContext.fillArray(1);
+                                    index = binarySearch.search(objects, vegetable.get(0));
+                                    if(index == -1){
+                                        System.out.println("Данного объекта нет в списке");
+                                    }else{
+                                        System.out.println("Данный объект находится на " + index + 1 + " месте в списке");
+                                    }
                                     break;
 
                             }
