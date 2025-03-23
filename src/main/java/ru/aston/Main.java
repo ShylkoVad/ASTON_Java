@@ -28,21 +28,21 @@ public class Main {
         boolean running = true;
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             while (running) {
-
-                System.out.println("Введите изначальную длину массива для ввода данных:\n" +
-                        "Введите 0 для завершения работы");
-                int size = parseInt(reader.readLine());
-                if (size == 0) {
+                System.out.println("Выберите тип данных:\n" +
+                        "1.Автомобили\n" +
+                        "2.Книги\n" +
+                        "3.Корнеплоды\n" +
+                        "0.Завершение работы");
+                int choiceDataType = parseInt(reader.readLine());
+                if (choiceDataType == 0) {
                     running = false;
                     System.out.println("Завершение работы");
                     break;
                 }
 
-                System.out.println("Выберите тип данных:\n" +
-                        "1.Автомобили\n" +
-                        "2.Книги\n" +
-                        "3.Корнеплоды");
-                int choiceDataType = parseInt(reader.readLine());
+                System.out.println("Введите изначальную длину массива для ввода данных:");
+                int size = parseInt(reader.readLine());
+
 
                 System.out.println("Введите цифру для выбора способа ввода данных:\n" +
                         "1.Заполнить вручную.\n" +
