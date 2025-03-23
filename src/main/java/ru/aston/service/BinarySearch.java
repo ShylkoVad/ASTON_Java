@@ -1,5 +1,7 @@
 package ru.aston.service;
 
+import ru.aston.my_array_list.*;
+
 public class BinarySearch<T extends Comparable> {
     public int Search(MyArrayList<T> objects, T findValue){
         int result = -1;
