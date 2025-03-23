@@ -56,6 +56,8 @@ public class CarManualFillStrategy implements FillStrategy<Car> {
                         year = Integer.parseInt(input);
                     }
                 }
+                // Добавляем новый объект Car в список
+                cars.add(new Car(power, model, year));
             }
         } catch (IOException e) {
             System.out.println("Ошибка ввода/вывода: " + e.getMessage());
