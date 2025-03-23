@@ -1,5 +1,7 @@
 package ru.aston.my_array_list;
 
+import java.util.Iterator;
+
 /**
  * Класс CustomArrayList реализует интерфейс MyCustomList и представляет собой динамический массив.
  * Поддерживаемые методы описаны ниже.
@@ -200,6 +202,45 @@ public class CustomArrayList<E> implements MyCustomList<E> {
             }
         }
         return -1;
+    }
+
+    /**
+     * Метод возвращает итератор, позволяющий перебрать элементы в списке.
+     */
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<E>() {
+            private int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return index < size;
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            public E next() {
+                return (E) elementsData[index++];
+            }
+        };
+    }
+
+    /**
+     * Метод возвращает список объектов коллекции.
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Collection elements = {[");
+
+        for (int i = 0; i < size; i++) {
+            sb.append(elementsData[i]);
+            if (i < size - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]}");
+        return sb.toString();
     }
 
 

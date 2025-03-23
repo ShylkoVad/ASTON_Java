@@ -1,5 +1,7 @@
 package ru.aston.my_array_list;
 
+import java.util.Iterator;
+
 public interface MyCustomList<E> {
     void add(E o);               // Добавляет элемент в конец списка
     void set(E o, int index);    // Устанавливает элемент по указанному индексу
@@ -12,4 +14,5 @@ public interface MyCustomList<E> {
     boolean isEmpty();           // Проверяет, пуст ли список
     int indexOf(Object o);       // Возвращает индекс первого вхождения элемента
     int lastIndexOf(Object o);    // Возвращает индекс последнего вхождения элемента
+    Iterator<E> iterator();       // Возвращает итератор
 }
