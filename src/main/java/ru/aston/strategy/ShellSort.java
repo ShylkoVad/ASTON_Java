@@ -2,8 +2,6 @@ package ru.aston.strategy;
 
 import ru.aston.my_array_list.MyArrayList;
 
-import java.util.ArrayList;
-
 public class ShellSort {
 
     public static <T extends Comparable<T>> void shellSortComparable(MyArrayList<T> list) {
