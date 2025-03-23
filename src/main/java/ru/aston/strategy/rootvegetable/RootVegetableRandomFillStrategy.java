@@ -1,7 +1,7 @@
 package ru.aston.strategy.rootvegetable;
 
 import ru.aston.entity.RootVegetable;
-import ru.aston.my_array_list.CustomArrayList;
+import ru.aston.collection.CustomArrayList;
 import ru.aston.strategy.FillStrategy;
 
 import java.util.Random;

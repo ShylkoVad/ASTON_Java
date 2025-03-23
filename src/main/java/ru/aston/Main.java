@@ -3,7 +3,7 @@ package ru.aston;
 import ru.aston.entity.Book;
 import ru.aston.entity.Car;
 import ru.aston.entity.RootVegetable;
-import ru.aston.my_array_list.CustomArrayList;
+import ru.aston.collection.CustomArrayList;
 import ru.aston.strategy.ListContext;
 import ru.aston.strategy.book.BookFileFillStrategy;
 import ru.aston.strategy.book.BookManualFillStrategy;
@@ -18,7 +18,6 @@ import ru.aston.strategy.rootvegetable.RootVegetableRandomFillStrategy;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 import static java.lang.Integer.*;
 

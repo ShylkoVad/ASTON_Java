@@ -1,4 +1,4 @@
-package ru.aston.my_array_list;
+package ru.aston.collection;
 
 import ru.aston.entity.Book;
 import ru.aston.entity.Car;

@@ -1,7 +1,7 @@
 package ru.aston.strategy.car;
 
 import ru.aston.entity.Car;
-import ru.aston.my_array_list.CustomArrayList;
+import ru.aston.collection.CustomArrayList;
 import ru.aston.service.Validator;
 import ru.aston.strategy.FillStrategy;
 

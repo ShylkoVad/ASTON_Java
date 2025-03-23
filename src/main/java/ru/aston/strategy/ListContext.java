@@ -1,6 +1,6 @@
 package ru.aston.strategy;
 
-import ru.aston.my_array_list.CustomArrayList;
+import ru.aston.collection.CustomArrayList;
 
 
 public class ListContext<T> {
