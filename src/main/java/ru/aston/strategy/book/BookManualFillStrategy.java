@@ -1,7 +1,7 @@
 package ru.aston.strategy.book;
 
 import ru.aston.entity.Book;
-import ru.aston.my_array_list.CustomArrayList;
+import ru.aston.collection.CustomArrayList;
 import ru.aston.service.ValidatorBook;
 import ru.aston.strategy.FillStrategy;
 
