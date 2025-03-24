@@ -1,8 +1,8 @@
 package ru.aston.strategy.rootvegetable;
 
 import ru.aston.entity.RootVegetable;
-import ru.aston.my_array_list.CustomArrayList;
-import ru.aston.service.ValidatorRootVegetable;
+import ru.aston.collection.CustomArrayList;
+import ru.aston.service.Validator;
 import ru.aston.strategy.FillStrategy;
 
 import java.io.BufferedReader;
