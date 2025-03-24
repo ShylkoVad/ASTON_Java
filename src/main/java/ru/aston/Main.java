@@ -19,7 +19,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static java.lang.Integer.*;
+import static java.lang.Integer.parseInt;
 
 public class Main {
     public static void main(String[] args) {
@@ -87,7 +87,7 @@ public class Main {
                         } else if (choiceFillStrategy == 3) {
                             vegetableContext.setStrategy(new RootVegetableRandomFillStrategy());
                         }
-                        vegetableContext.fillArray(size);
+                        objects = vegetableContext.fillArray(size);
                         break;
 
                 }
@@ -101,18 +101,18 @@ public class Main {
                     int choiceAction = parseInt(reader.readLine());
 
                     switch (choiceAction) {
-                        case 1 :
+                        case 1:
                             break;
-                        case 2 :
+                        case 2:
                             break;
-                        case 3 :
+                        case 3:
                             break;
                         case 4:
                             for (int i = 0; i < objects.size(); i++) {
                                 System.out.println(objects.get(i).toString());
                             }
                             break;
-                        case 0 :
+                        case 0:
                             objects = null;
                             break;
                     }

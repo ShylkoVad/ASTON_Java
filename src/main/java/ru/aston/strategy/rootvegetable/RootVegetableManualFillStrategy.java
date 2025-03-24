@@ -18,18 +18,48 @@ public class RootVegetableManualFillStrategy implements FillStrategy<RootVegetab
         try {
             for (int i = 0; i < size; i++) {
                 System.out.println("Введите данные для корнеплода " + (i + 1) + ":");
-                System.out.print("Тип: ");
-                String type = reader.readLine();
-                System.out.print("Вес (кг): ");
-                double weight = Double.parseDouble(reader.readLine());
-                System.out.print("Цвет: ");
-                String color = reader.readLine();
-                if (Validator.validateRootVegetableData(type, weight, color)) {
-                    vegetables.add(new RootVegetable(type, weight, color));
+                String type = null;
+                Double weight = null;
+                String color = null;
+
+                // Запрос типа
+                while (type == null) {
+                    System.out.print("Тип: ");
+                    String input = reader.readLine(); // Считываем ввод
+
+                    // Проверяем валидацию
+                    if (ValidatorRootVegetable.validateRootVegetableDataType(input)) {
+                        type = input;
+                    }
                 }
+
+                // Запрос веса
+                while (weight == null) {
+                    System.out.print("Вес (кг): ");
+                    String input = reader.readLine(); // Считываем ввод
+
+                    // Проверяем валидацию
+                    if (ValidatorRootVegetable.validateRootVegetableDataWeight(input)) {
+                        // Если валидация успешна, преобразуем ввод в Double
+                        weight = Double.parseDouble(input);
+                    }
+                }
+
+                // Запрос цвета
+                while (color == null) {
+                    System.out.print("Цвет: ");
+                    String input = reader.readLine(); // Считываем ввод
+
+                    // Проверяем валидацию
+                    if (ValidatorRootVegetable.validateRootVegetableDataColor(input)) {
+                        color = input;
+                    }
+                }
+                // Добавляем новый объект RootVegetable в список
+                vegetables.add(new RootVegetable(type, weight, color));
             }
         } catch (IOException e) {
-            System.out.println("Введены некорректные данные");
+            System.out.println("Ошибка ввода/вывода: " + e.getMessage());
         }
         return vegetables;
     }
