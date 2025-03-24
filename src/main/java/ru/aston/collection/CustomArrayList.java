@@ -231,7 +231,7 @@ public class CustomArrayList<E> implements MyCustomList<E> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Collection elements = {[");
+        sb.append("[");
 
         for (int i = 0; i < size; i++) {
             sb.append(elementsData[i]);
@@ -239,7 +239,7 @@ public class CustomArrayList<E> implements MyCustomList<E> {
                 sb.append(", ");
             }
         }
-        sb.append("]}");
+        sb.append("]");
         return sb.toString();
     }
 
