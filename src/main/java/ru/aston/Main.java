@@ -4,6 +4,7 @@ import ru.aston.entity.Book;
 import ru.aston.entity.Car;
 import ru.aston.entity.RootVegetable;
 import ru.aston.collection.CustomArrayList;
+import ru.aston.service.BinarySearch;
 import ru.aston.strategy.ListContext;
 import ru.aston.strategy.book.BookFileFillStrategy;
 import ru.aston.strategy.book.BookManualFillStrategy;
@@ -18,6 +19,7 @@ import ru.aston.strategy.rootvegetable.RootVegetableRandomFillStrategy;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import static java.lang.Integer.*;
 
@@ -32,22 +34,50 @@ public class Main {
                         "2.Книги\n" +
                         "3.Корнеплоды\n" +
                         "0.Завершение работы");
-                int choiceDataType = parseInt(reader.readLine());
+                int choiceDataType = inputIntData(reader);
+                if(choiceDataType > 3 || choiceDataType < 0){
+                    System.out.println("Такой операции не существует");
+                    continue;
+                }
+
                 if (choiceDataType == 0) {
                     running = false;
                     System.out.println("Завершение работы");
                     break;
                 }
 
-                System.out.println("Введите изначальную длину массива для ввода данных:");
-                int size = parseInt(reader.readLine());
+                int choiceFillStrategy = -1;
+                while (choiceFillStrategy < 0 || choiceFillStrategy > 3){
+                    System.out.println("Введите цифру для выбора способа ввода данных:\n" +
+                            "1.Заполнить вручную.\n" +
+                            "2.Заполнить из файла.\n" +
+                            "3.Заполнить случайно (не более 10 элементов).\n" +
+                            "0.Вернуться к выбору типа данных");
+                    choiceFillStrategy = inputIntData(reader);
+                    if(choiceFillStrategy < 0 || choiceFillStrategy > 3){
+                        System.out.println("Такой операции не существует");
+                    }
+                }
+
+                if(choiceFillStrategy == 0){
+                    continue;
+                }
 
 
-                System.out.println("Введите цифру для выбора способа ввода данных:\n" +
-                        "1.Заполнить вручную.\n" +
-                        "2.Заполнить из файла.\n" +
-                        "3.Заполнить случайно.");
-                int choiceFillStrategy = parseInt(reader.readLine());
+                int size = -1;
+                while (size < 1){
+                    System.out.println("Введите изначальную длину массива для ввода данных:");
+                    size = inputIntData(reader);
+                    if(size < 1){
+                        System.out.println("Некорректная длинна массива");
+                        continue;
+                    }
+
+                    if(choiceFillStrategy == 3 && size > 10){
+                        System.out.println("Случайным образом может быть создано не более 10 элементов");
+                        size = -1;
+                    }
+                }
 
                 switch (choiceDataType) {
                     case 1:
@@ -92,18 +122,65 @@ public class Main {
 
                 }
                 while (objects != null) {
-                    System.out.println("Выберите действие:\n" +
-                            "1.Сортировать данные\n" +
-                            "2.Найти объект\n" +
-                            "3.Записать в файл\n" +
-                            "4.Вывести данные\n" +
-                            "0.Вернуться к выбору типа данных");
-                    int choiceAction = parseInt(reader.readLine());
+                    int choiceAction = -1;
+                    while (choiceAction < 0 || choiceAction > 4){
+                        System.out.println("Выберите действие:\n" +
+                                "1.Сортировать данные\n" +
+                                "2.Найти объект\n" +
+                                "3.Записать в файл\n" +
+                                "4.Вывести данные\n" +
+                                "0.Вернуться к выбору типа данных");
+                        choiceAction = inputIntData(reader);
+                        if(choiceAction < 0 || choiceAction > 4){
+                            System.out.println("Такой операции не существует");
+                        }
+                    }
 
                     switch (choiceAction) {
                         case 1 :
                             break;
                         case 2 :
+                            BinarySearch binarySearch = new BinarySearch();
+                            int index = -1;
+                            switch (choiceDataType) {
+                                case 1:
+                                    CustomArrayList<Car> car;
+                                    ListContext<Car> carsContext = new ListContext<>();
+                                    carsContext.setStrategy(new CarManualFillStrategy());
+                                    car = carsContext.fillArray(1);
+                                    index = binarySearch.search(objects, car.get(0));
+                                    if(index == -1){
+                                        System.out.println("Данного объекта нет в списке");
+                                    }else{
+                                        System.out.println("Данный объект находится на " + index + 1 + " месте в списке");
+                                    }
+                                    break;
+                                case 2:
+                                    CustomArrayList<Book> book;
+                                    ListContext<Book> booksContext = new ListContext<>();
+                                    booksContext.setStrategy(new BookManualFillStrategy());
+                                    book = booksContext.fillArray(1);
+                                    index = binarySearch.search(objects, book.get(0));
+                                    if(index == -1){
+                                        System.out.println("Данного объекта нет в списке");
+                                    }else{
+                                        System.out.println("Данный объект находится на " + index + 1 + " месте в списке");
+                                    }
+                                    break;
+                                case 3:
+                                    CustomArrayList<RootVegetable> vegetable;
+                                    ListContext<RootVegetable> vegetableContext = new ListContext<>();
+                                    vegetableContext.setStrategy(new RootVegetableManualFillStrategy());
+                                    vegetable = vegetableContext.fillArray(1);
+                                    index = binarySearch.search(objects, vegetable.get(0));
+                                    if(index == -1){
+                                        System.out.println("Данного объекта нет в списке");
+                                    }else{
+                                        System.out.println("Данный объект находится на " + index + 1 + " месте в списке");
+                                    }
+                                    break;
+
+                            }
                             break;
                         case 3 :
                             break;
@@ -123,4 +200,17 @@ public class Main {
         }
     }
 
+    private static int inputIntData(BufferedReader reader){
+        int choiceDataType = -1;
+        try{
+            choiceDataType = parseInt(reader.readLine());
+            return choiceDataType;
+        } catch (NumberFormatException exception){
+            System.out.println("Введены не корректные данные");
+            return -1;
+        } catch (IOException exception){
+            System.out.println("Введены не корректные данные, при вводе данных опирайтесь на шаблон.");
+            return -1;
+        }
+    }
 }

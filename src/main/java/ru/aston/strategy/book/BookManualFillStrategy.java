@@ -1,8 +1,8 @@
 package ru.aston.strategy.book;
 
-import ru.aston.entity.Book;
 import ru.aston.collection.CustomArrayList;
-import ru.aston.service.Validator;
+import ru.aston.entity.Book;
+import ru.aston.service.ValidatorBook;
 import ru.aston.strategy.FillStrategy;
 
 import java.io.BufferedReader;
@@ -18,19 +18,53 @@ public class BookManualFillStrategy implements FillStrategy<Book> {
         try {
             for (int i = 0; i < size; i++) {
                 System.out.println("Введите данные для книги " + (i + 1) + ":");
-                System.out.print("Автор: ");
-                String author = reader.readLine();
-                System.out.print("Название: ");
-                String title = reader.readLine();
-                System.out.print("Количество страниц: ");
-                int pages = Integer.parseInt(reader.readLine());
-                if (Validator.validateBookData(title, author, pages)) {
-                    books.add(new Book(author, title, pages));
+                String author = null;
+                String title = null;
+                Integer pages = null;
+
+                // Запрос автора с валидацией
+                while (author == null) {
+                    System.out.print("Автор: ");
+                    String input = reader.readLine(); // Считываем ввод
+
+                    // Проверяем валидацию
+                    if (ValidatorBook.validateBookDataAuthor(input)) {
+                        // Если валидация успешна, преобразуем ввод в Integer
+                        author = input;
+                    }
                 }
+
+                // Запрос названия
+                while (title == null) {
+                    System.out.print("Название: ");
+                    String input = reader.readLine(); // Считываем ввод
+
+                    // Проверяем валидацию
+                    if (ValidatorBook.validateBookDataTitle(input)) {
+                        // Если валидация успешна, преобразуем ввод в Integer
+                        title = input;
+                    }
+                }
+
+                // Запрос количества страниц
+                while (pages == null) {
+                    System.out.print("Количество страниц: ");
+                    String input = reader.readLine(); // Считываем ввод
+
+                    // Проверяем валидацию
+                    if (ValidatorBook.validateBookDataPages(input)) {
+                        // Если валидация успешна, преобразуем ввод в Integer
+                        pages = Integer.parseInt(input);
+                    }
+                }
+                // Добавляем новый объект Book в список
+                books.add(new Book(author, title, pages));
+
             }
         } catch (IOException e) {
-            System.out.println("Введены некорректные данные");
+            System.out.println("Ошибка ввода/вывода: " + e.getMessage());
         }
         return books;
     }
 }
+
