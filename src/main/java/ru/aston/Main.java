@@ -6,6 +6,7 @@ import ru.aston.entity.RootVegetable;
 import ru.aston.collection.CustomArrayList;
 import ru.aston.service.BinarySearch;
 import ru.aston.strategy.ListContext;
+import ru.aston.strategy.ShellSort;
 import ru.aston.strategy.book.BookFileFillStrategy;
 import ru.aston.strategy.book.BookManualFillStrategy;
 import ru.aston.strategy.book.BookRandomFillStrategy;
@@ -15,6 +16,7 @@ import ru.aston.strategy.car.CarRandomFillStrategy;
 import ru.aston.strategy.rootvegetable.RootVegetableFileFillStrategy;
 import ru.aston.strategy.rootvegetable.RootVegetableManualFillStrategy;
 import ru.aston.strategy.rootvegetable.RootVegetableRandomFillStrategy;
+import ru.aston.utils.ListWriter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,8 +27,9 @@ import static java.lang.Integer.*;
 
 public class Main {
     public static void main(String[] args) {
-        CustomArrayList<?> objects = null;
+        CustomArrayList objects = null;
         boolean running = true;
+        boolean canSort = true;
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             while (running) {
                 System.out.println("Выберите тип данных:\n" +
@@ -138,9 +141,31 @@ public class Main {
 
                     switch (choiceAction) {
                         case 1 :
+                            if(canSort){
+                                ShellSort.shellSortComparable(objects);
+                                canSort = false;
+                            }
+                            System.out.println("Данные отсортированы");
                             break;
                         case 2 :
-                            BinarySearch binarySearch = new BinarySearch();
+                            if(canSort){
+                                int sort = -1;
+                                while (sort < 1 || sort > 2){
+                                    System.out.println("Для поиска объекта данные будут отсортированы, хотите продолжить?\n" +
+                                            "1.Отсортировать данные и найти объект\n"+
+                                            "2.Вернуться к выбору действий");
+                                    sort = inputIntData(reader);
+                                    if(sort < 1 || sort > 2){
+                                        System.out.println("Такой операции не существует");
+                                    }
+                                }
+                                if(sort == 2){
+                                    break;
+                                }
+                                ShellSort.shellSortComparable(objects);
+                                canSort = false;
+                            }
+
                             int index = -1;
                             switch (choiceDataType) {
                                 case 1:
@@ -148,11 +173,11 @@ public class Main {
                                     ListContext<Car> carsContext = new ListContext<>();
                                     carsContext.setStrategy(new CarManualFillStrategy());
                                     car = carsContext.fillArray(1);
-                                    index = binarySearch.search(objects, car.get(0));
+                                    index = BinarySearch.search(objects, car.get(0));
                                     if(index == -1){
                                         System.out.println("Данного объекта нет в списке");
                                     }else{
-                                        System.out.println("Данный объект находится на " + index + 1 + " месте в списке");
+                                        System.out.println("Данный объект находится на " + ++index + " месте в списке");
                                     }
                                     break;
                                 case 2:
@@ -160,11 +185,11 @@ public class Main {
                                     ListContext<Book> booksContext = new ListContext<>();
                                     booksContext.setStrategy(new BookManualFillStrategy());
                                     book = booksContext.fillArray(1);
-                                    index = binarySearch.search(objects, book.get(0));
+                                    index = BinarySearch.search(objects, book.get(0));
                                     if(index == -1){
                                         System.out.println("Данного объекта нет в списке");
                                     }else{
-                                        System.out.println("Данный объект находится на " + index + 1 + " месте в списке");
+                                        System.out.println("Данный объект находится на " + ++index + " месте в списке");
                                     }
                                     break;
                                 case 3:
@@ -172,17 +197,20 @@ public class Main {
                                     ListContext<RootVegetable> vegetableContext = new ListContext<>();
                                     vegetableContext.setStrategy(new RootVegetableManualFillStrategy());
                                     vegetable = vegetableContext.fillArray(1);
-                                    index = binarySearch.search(objects, vegetable.get(0));
+                                    index = BinarySearch.search(objects, vegetable.get(0));
                                     if(index == -1){
                                         System.out.println("Данного объекта нет в списке");
                                     }else{
-                                        System.out.println("Данный объект находится на " + index + 1 + " месте в списке");
+                                        System.out.println("Данный объект находится на " + ++index + " месте в списке");
                                     }
                                     break;
 
                             }
                             break;
                         case 3 :
+                            ListWriter writer = new ListWriter(objects);
+                            writer.fileWriter();
+                            System.out.println("Данные записаны в файл");
                             break;
                         case 4:
                             for (int i = 0; i < objects.size(); i++) {
@@ -191,6 +219,7 @@ public class Main {
                             break;
                         case 0 :
                             objects = null;
+                            canSort = true;
                             break;
                     }
                 }

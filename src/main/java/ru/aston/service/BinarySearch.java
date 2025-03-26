@@ -2,8 +2,8 @@ package ru.aston.service;
 
 import ru.aston.collection.CustomArrayList;
 
-public class BinarySearch<T extends Comparable<T>> {
-    public int search(CustomArrayList<T> objects, T findValue) {
+public class BinarySearch{
+    public static<T extends Comparable<T>>  int search(CustomArrayList<T> objects, T findValue) {
         int result = -1;
         int low = 0;
         int high = objects.size() - 1;
