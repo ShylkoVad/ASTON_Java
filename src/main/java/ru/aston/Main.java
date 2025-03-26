@@ -120,7 +120,7 @@ public class Main {
                         } else if (choiceFillStrategy == 3) {
                             vegetableContext.setStrategy(new RootVegetableRandomFillStrategy());
                         }
-                        vegetableContext.fillArray(size);
+                        objects = vegetableContext.fillArray(size);
                         break;
 
                 }
