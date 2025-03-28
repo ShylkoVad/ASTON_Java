@@ -18,6 +18,7 @@ import ru.aston.strategy.rootvegetable.RootVegetableFileFillStrategy;
 import ru.aston.strategy.rootvegetable.RootVegetableManualFillStrategy;
 import ru.aston.strategy.rootvegetable.RootVegetableRandomFillStrategy;
 import ru.aston.utils.ListWriter;
+import ru.aston.utils.ValueWriter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -190,6 +191,22 @@ public class Main {
                                         System.out.println("Данного объекта нет в списке");
                                     }else{
                                         System.out.println("Данный объект находится на " + ++index + " месте в списке");
+
+                                        int write = -1;
+                                        while (write < 1 || write > 2){
+                                            System.out.println("Записать данные объекта в файл?\n" +
+                                                    "1.Да\n" +
+                                                    "2.Нет");
+                                            write = inputIntData(reader);
+                                            if(write < 0 || write > 2){
+                                                System.out.println("Такой операции не существует");
+                                            }
+                                            if(write == 1){
+                                                ValueWriter valueWriter = new ValueWriter(car.get(0));
+                                                valueWriter.writer();
+                                                System.out.println("Данные записаны.\n");
+                                            }
+                                        }
                                     }
                                     break;
                                 case 2:
@@ -202,6 +219,21 @@ public class Main {
                                         System.out.println("Данного объекта нет в списке");
                                     }else{
                                         System.out.println("Данный объект находится на " + ++index + " месте в списке");
+                                        int write = -1;
+                                        while (write < 1 || write > 2){
+                                            System.out.println("Записать данные объекта в файл?\n" +
+                                                    "1.Да\n" +
+                                                    "2.Нет");
+                                            write = inputIntData(reader);
+                                            if(write < 0 || write > 2){
+                                                System.out.println("Такой операции не существует");
+                                            }
+                                            if(write == 1){
+                                                ValueWriter valueWriter = new ValueWriter(book.get(0));
+                                                valueWriter.writer();
+                                                System.out.println("Данные записаны.\n");
+                                            }
+                                        }
                                     }
                                     break;
                                 case 3:
@@ -214,6 +246,21 @@ public class Main {
                                         System.out.println("Данного объекта нет в списке");
                                     }else{
                                         System.out.println("Данный объект находится на " + ++index + " месте в списке");
+                                        int write = -1;
+                                        while (write < 1 || write > 2){
+                                            System.out.println("Записать данные объекта в файл?\n" +
+                                                    "1.Да\n" +
+                                                    "2.Нет");
+                                            write = inputIntData(reader);
+                                            if(write < 0 || write > 2){
+                                                System.out.println("Такой операции не существует");
+                                            }
+                                            if(write == 1){
+                                                ValueWriter valueWriter = new ValueWriter(vegetable.get(0));
+                                                valueWriter.writer();
+                                                System.out.println("Данные записаны.\n");
+                                            }
+                                        }
                                     }
                                     break;
 
