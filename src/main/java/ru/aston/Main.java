@@ -98,6 +98,9 @@ public class Main {
                             carsContext.setStrategy(new CarRandomFillStrategy());
                         }
                         objects = carsContext.fillArray(size);
+                        if(objects.isEmpty()){
+                            continue;
+                        }
                         break;
                     case 2:
                         ListContext<Book> booksContext = new ListContext<>();
@@ -111,6 +114,9 @@ public class Main {
                             booksContext.setStrategy(new BookRandomFillStrategy());
                         }
                         objects = booksContext.fillArray(size);
+                        if(objects.isEmpty()){
+                            continue;
+                        }
                         break;
                     case 3:
                         ListContext<RootVegetable> vegetableContext = new ListContext<>();
@@ -124,6 +130,9 @@ public class Main {
                             vegetableContext.setStrategy(new RootVegetableRandomFillStrategy());
                         }
                         objects = vegetableContext.fillArray(size);
+                        if(objects.isEmpty()){
+                            continue;
+                        }
                         break;
 
                 }
