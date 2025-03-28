@@ -1,5 +1,6 @@
 package ru.aston;
 
+import ru.aston.conditionalsort.ConditionalSort;
 import ru.aston.entity.Book;
 import ru.aston.entity.Car;
 import ru.aston.entity.RootVegetable;
@@ -22,6 +23,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.function.Function;
 
 import static java.lang.Integer.*;
 
@@ -126,15 +128,16 @@ public class Main {
                 }
                 while (objects != null) {
                     int choiceAction = -1;
-                    while (choiceAction < 0 || choiceAction > 4){
+                    while (choiceAction < 0 || choiceAction > 5){
                         System.out.println("Выберите действие:\n" +
                                 "1.Сортировать данные\n" +
                                 "2.Найти объект\n" +
                                 "3.Записать в файл\n" +
                                 "4.Вывести данные\n" +
+                                "5. Сортировать по чётным полям\n" +
                                 "0.Вернуться к выбору типа данных");
                         choiceAction = inputIntData(reader);
-                        if(choiceAction < 0 || choiceAction > 4){
+                        if(choiceAction < 0 || choiceAction > 5){
                             System.out.println("Такой операции не существует");
                         }
                     }
@@ -217,6 +220,18 @@ public class Main {
                                 System.out.println(objects.get(i).toString());
                             }
                             break;
+                        case 5:
+                            switch (choiceDataType){
+                                case 1:
+                                    ConditionalSort.sortByEvenField(objects,Car::getPower);
+                                    break;
+                                case 2:
+                                    ConditionalSort.sortByEvenField(objects, (Book::getPageCount));
+                                    break;
+                                case 3:
+                                    ConditionalSort.sortByEvenField(objects, RootVegetable::getWeight);
+                                    break;
+                            }
                         case 0 :
                             objects = null;
                             canSort = true;
