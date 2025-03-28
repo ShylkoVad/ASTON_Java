@@ -221,17 +221,21 @@ public class Main {
                             }
                             break;
                         case 5:
-                            switch (choiceDataType){
-                                case 1:
-                                    ConditionalSort.sortByEvenField(objects,Car::getPower);
-                                    break;
-                                case 2:
-                                    ConditionalSort.sortByEvenField(objects, (Book::getPageCount));
-                                    break;
-                                case 3:
-                                    ConditionalSort.sortByEvenField(objects, RootVegetable::getWeight);
-                                    break;
+                            if (canSort){
+                                switch (choiceDataType){
+                                    case 1:
+                                        ConditionalSort.sortByEvenField(objects,Car::getPower);
+                                        break;
+                                    case 2:
+                                        ConditionalSort.sortByEvenField(objects, (Book::getPageCount));
+                                        break;
+                                    case 3:
+                                        ConditionalSort.sortByEvenField(objects, RootVegetable::getWeight);
+                                        break;
+                                }
                             }
+                            System.out.println("Данные отсортированы по полям с чётными значениями");
+                            break;
                         case 0 :
                             objects = null;
                             canSort = true;
