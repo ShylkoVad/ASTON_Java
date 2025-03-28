@@ -18,6 +18,7 @@ import ru.aston.strategy.rootvegetable.RootVegetableFileFillStrategy;
 import ru.aston.strategy.rootvegetable.RootVegetableManualFillStrategy;
 import ru.aston.strategy.rootvegetable.RootVegetableRandomFillStrategy;
 import ru.aston.utils.ListWriter;
+import ru.aston.utils.ValueWriter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -181,6 +182,20 @@ public class Main {
                                         System.out.println("Данного объекта нет в списке");
                                     }else{
                                         System.out.println("Данный объект находится на " + ++index + " месте в списке");
+                                        int write = -1;
+                                        System.out.println("Записать данные объекта в файл?\n" +
+                                                "1.Да\n" +
+                                                "2.Нет");
+                                        write = inputIntData(reader);
+                                        if(write == 1){
+                                            ValueWriter valueWriter = new ValueWriter(car.get(index));
+                                            valueWriter.writer();
+                                            System.out.println("Данные записаны.\n");
+                                        }if(write == 2){
+                                            continue;
+                                        } else if(write <= 0 || write > 2){
+                                            System.out.println("Такой операции не существует.\n");
+                                        }
                                     }
                                     break;
                                 case 2:
