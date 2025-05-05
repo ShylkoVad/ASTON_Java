@@ -4,10 +4,8 @@ public class Bear extends Mammal {
 
     private final Wool wool;
 
-    public Bear(int numberOfVertebrae, Wool wool) {
-        super(numberOfVertebrae);
+    protected Bear(String name, Wool wool) {
+        super(name);
         this.wool = wool;
     }
-
-
 }
