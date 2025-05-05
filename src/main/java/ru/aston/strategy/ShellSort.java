@@ -1,8 +1,10 @@
 package ru.aston.strategy;
 
+import ru.aston.collection.CustomArrayList;
+
 public class ShellSort {
 
-    public static <T extends Comparable<T>> void shellSortComparable(MyArrayList<T> list) {
+    public static <T extends Comparable<T>> void shellSortComparable(CustomArrayList<T> list) {
         if (list == null || list.isEmpty()) {
             throw new IllegalArgumentException("List is null or empty");
         }

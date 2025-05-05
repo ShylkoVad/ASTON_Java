@@ -11,7 +11,7 @@ import java.util.Iterator;
  * @param <E> тип элементов в списке
  */
 
-public class CustomArrayList<E> implements MyCustomList<E> {
+public class CustomArrayList<E> implements Iterable<E>, MyCustomList<E>  {
 
     /**
      * Массив в котором хранятся все элементы списка

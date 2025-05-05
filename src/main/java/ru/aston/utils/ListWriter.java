@@ -1,5 +1,7 @@
 package ru.aston.utils;
 
+import ru.aston.collection.CustomArrayList;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -11,9 +13,9 @@ import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.CREATE;
 
 public class ListWriter<T>{
-    private final List<T> listWriter;
+    private final CustomArrayList<T> listWriter;
 
-    public ListWriter(List<T> list){
+    public ListWriter(CustomArrayList<T> list){
         this.listWriter = list;
     }
 
