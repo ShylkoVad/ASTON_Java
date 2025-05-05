@@ -2,5 +2,5 @@ package ru.aston.stream_53.lesson_1;
 
 public interface LiveInWater {
 
-    boolean swim();
+    String swim();
 }
